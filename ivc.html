@@ -1,0 +1,457 @@
+<!-- create a restaurant menu that shows all the items of the restaurant along with their prices and descriptions. 
+The menu should be organized by categories such as appetizers, main courses, desserts, and beverages.
+Each item should have a clear name, a detailed description, and a prominently displayed price. 
+Also to book the reserveation for the restaurant, you can include a reservation form that allows customers to select the date,
+time, and number of guests. The form should also have a submit button that sends the reservation details to the restaurant's email
+or database for processing. Additionally, you can include a section for customer reviews and ratings to provide feedback on the 
+dining experience,which has indian dishes. -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India Palace - Restaurant Menu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #d4af37;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.121);
+        }
+        header h1 {
+            font-size: 2.5em;
+            color: #008b35;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.037);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .menu-section {
+            margin-bottom: 40px;
+        }
+        .section-title {
+            background-color: #00898b;
+            color: #0b0b0b;
+            padding: 15px;
+            font-size: 1.8em;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .menu-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border-left: 5px solid #d4af37;
+            transition: transform 0.3s ease;
+        }
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        .item-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #008b74;
+            margin-bottom: 8px;
+        }
+        .item-description {
+            font-size: 0.95em;
+            color: #666;
+            margin-bottom: 12px;
+        }
+        .item-price {
+            font-size: 1.5em;
+            color: #d4af37;
+            font-weight: bold;
+        }
+        .forms-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 40px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .form-title {
+            font-size: 1.8em;
+            color: #8b0066;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #d4af37;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        button {
+            background-color: #488b00;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #d4af37;
+            color: #8b0066a4;
+        }
+        .reviews-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .review-item {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+        .review-item:last-child {
+            border-bottom: none;
+        }
+        .review-name {
+            font-weight: bold;
+            color: #8b0000;
+        }
+        .review-rating {
+            color: #d4af37;
+            font-size: 1.1em;
+        }
+        .review-text {
+            color: #666;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🍛 India Palace 🍛</h1>
+        <p>Authentic Indian Cuisine Experience</p>
+    </header>
+
+    <div class="container">
+        <!-- Appetizers -->
+        <div class="menu-section">
+            <div class="section-title">Appetizers</div>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <div class="item-name">Samosa</div>
+                    <div class="item-description">Crispy fried pastry filled with spiced potatoes and peas</div>
+                    <div class="item-price">₹80</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-name">Pakora</div>
+                    <div class="item-description">Vegetables dipped in gram flour batter and deep fried</div>
+                    <div class="item-price">₹120</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-name">Spring Rolls</div>
+                    <div class="item-description">Crispy rolls filled with vegetables and spices</div>
+                    <div class="item-price">₹90</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-name">Paneer Tikka</div>
+                    <div class="item-description">Marinated cottage cheese grilled to perfection</div>
+                    <div class="item-price">₹200</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-name">Onion Bhajiya</div>
+                    <div class="item-description">Crispy onion fritters with aromatic spices</div>
+                    <div class="item-price">₹100</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-name">Chicken Tikka</div>
+                    <div class="item-description">Tender chicken pieces marinated and grilled</div>
+                    <div class="item-price">₹250</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Courses -->
+        <div class="menu-section">
+            <div class="section-title">Main Courses</div>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <div class="item-name">Butter Chicken</div>
+                    <div class="item-description">Tender chicken in a creamy tomato-based gravy</div>
+                    <div class="item-price">₹320</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-name">Palak Paneer</div>
+                    <div class="item-description">Cottage cheese in spinach curry with mild spices</div>
+                    <div class="item-price">₹280</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-name">Biryani (Chicken)</div>
+                    <div class="item-description">Fragrant basmati rice with tender chicken and spices</div>
+                    <div class="item-price">₹350</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-name">Biryani (Mutton)</div>
+                    <div class="item-description">Premium biryani with tender mutton pieces</div>
+                    <div class="item-price">₹400</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-name">Chana Masala</div>
+                    <div class="item-description">Chickpeas in aromatic tomato and onion curry</div>
+                    <div class="item-price">₹220</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-name">Tandoori Chicken</div>
+                    <div class="item-description">Half chicken marinated in yogurt and spices, tandoor cooked</div>
+                    <div class="item-price">₹400</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-name">Rogan Josh</div>
+                    <div class="item-description">Lamb in aromatic tomato and yogurt-based curry</div>
+                    <div class="item-price">₹420</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-name">Paneer Tikka Masala</div>
+                    <div class="item-description">Grilled paneer in creamy tomato-based sauce</div>
+                    <div class="item-price">₹300</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Breads -->
+        <div class="menu-section">
+            <div class="section-title">Breads</div>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <div class="item-name">Naan</div>
+                    <div class="item-description">Soft Indian flatbread baked in tandoor</div>
+                    <div class="item-price">₹40</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-name">Garlic Naan</div>
+                    <div class="item-description">Naan topped with fresh garlic and herbs</div>
+                    <div class="item-price">₹50</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-name">Roti</div>
+                    <div class="item-description">Whole wheat Indian flatbread</div>
+                    <div class="item-price">₹30</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-name">Paratha</div>
+                    <div class="item-description">Layered flatbread with ghee</div>
+                    <div class="item-price">₹60</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desserts -->
+        <div class="menu-section">
+            <div class="section-title">Desserts</div>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <div class="item-name">Gulab Jamun</div>
+                    <div class="item-description">Milk solids fried and soaked in sugar syrup</div>
+                    <div class="item-price">₹100</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-name">Kheer</div>
+                    <div class="item-description">Rice pudding with milk, nuts, and cardamom</div>
+                    <div class="item-price">₹120</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-name">Jalebi</div>
+                    <div class="item-description">Crispy spirals dipped in sugar syrup</div>
+                    <div class="item-price">₹90</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-name">Ras Malai</div>
+                    <div class="item-description">Soft cheese balls in creamy milk</div>
+                    <div class="item-price">₹150</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Beverages -->
+        <div class="menu-section">
+            <div class="section-title">Beverages</div>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <div class="item-name">Mango Lassi</div>
+                    <div class="item-description">Yogurt-based drink with fresh mango puree</div>
+                    <div class="item-price">₹140</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-name">Iced Tea</div>
+                    <div class="item-description">Chilled Indian-style tea with lemon</div>
+                    <div class="item-price">₹80</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-name">Masala Chai</div>
+                    <div class="item-description">Traditional spiced Indian tea</div>
+                    <div class="item-price">₹60</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-name">Soft Drinks</div>
+                    <div class="item-description">Assorted soft drinks and juices</div>
+                    <div class="item-price">₹50</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reservation and Reviews Section -->
+        <div class="forms-section">
+            <div class="two-column">
+                <!-- Reservation Form -->
+                <div>
+                    <div class="form-title">Book a Reservation</div>
+                    <form id="reservationForm">
+                        <div class="form-group">
+                            <label for="name">Full Name:</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number:</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Date:</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Time:</label>
+                            <input type="time" id="time" name="time" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="guests">Number of Guests:</label>
+                            <select id="guests" name="guests" required>
+                                <option value="">Select...</option>
+                                <option value="1">1 Guest</option>
+                                <option value="2">2 Guests</option>
+                                <option value="3">3 Guests</option>
+                                <option value="4">4 Guests</option>
+                                <option value="5">5 Guests</option>
+                                <option value="6+">6+ Guests</option>
+                            </select>
+                        </div>
+                        <button type="submit">Reserve Table</button>
+                    </form>
+                </div>
+
+                <!-- Review Form -->
+                <div>
+                    <div class="form-title">Leave a Review</div>
+                    <form id="reviewForm">
+                        <div class="form-group">
+                            <label for="reviewName">Your Name:</label>
+                            <input type="text" id="reviewName" name="reviewName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="rating">Rating:</label>
+                            <select id="rating" name="rating" required>
+                                <option value="">Select...</option>
+                                <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+                                <option value="4">⭐⭐⭐⭐ Very Good</option>
+                                <option value="3">⭐⭐⭐ Good</option>
+                                <option value="2">⭐⭐ Fair</option>
+                                <option value="1">⭐ Poor</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="reviewText">Your Review:</label>
+                            <textarea id="reviewText" name="reviewText" required></textarea>
+                        </div>
+                        <button type="submit">Submit Review</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviews Display -->
+        <div class="reviews-section">
+            <div class="form-title">Customer Reviews</div>
+            <div class="review-item">
+                <div class="review-name">Rajesh Kumar</div>
+                <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                <div class="review-text">"Fantastic food and excellent service! The butter chicken was absolutely delicious. Will visit again."</div>
+            </div>
+            <div class="review-item">
+                <div class="review-name">Priya Singh</div>
+                <div class="review-rating">⭐⭐⭐⭐</div>
+                <div class="review-text">"Great ambiance and authentic flavors. The biryani was perfectly cooked with nice aromas."</div>
+            </div>
+            <div class="review-item">
+                <div class="review-name">Amit Patel</div>
+                <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                <div class="review-text">"Best Indian restaurant in town! Every dish was prepared with care. Highly recommended!"</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('reservationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Reservation request submitted! We will confirm your booking shortly.');
+            this.reset();
+        });
+
+        document.getElementById('reviewForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your review!');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
